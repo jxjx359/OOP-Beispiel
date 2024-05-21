@@ -14,5 +14,10 @@ namespace OOP_Beispiel
         {
             Console.WriteLine("Die Räder befinden sich in der Luft.");
         }
+
+        public void Landing()
+        {
+            Console.WriteLine("Landeanflug beginnt. ");
+        }
     }
 }

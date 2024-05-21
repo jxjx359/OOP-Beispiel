@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOP_Beispiel
 {
@@ -6,7 +7,7 @@ namespace OOP_Beispiel
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World");
+            List<Vehicle> vehicles = new List<Vehicle>();
 
             Car car = new Car()
             {
@@ -15,9 +16,6 @@ namespace OOP_Beispiel
                 Breakspeed = 50,
                 Speed = 200
             };
-
-            car.LogInformation();
-            car.Move();
 
             Plane plane = new Plane()
             {
@@ -28,9 +26,6 @@ namespace OOP_Beispiel
                 HasJetDrive = true
             };
 
-            plane.LogInformation();
-            plane.Move();
-
             Motorcycle motorcycle = new Motorcycle()
             {
                 Acceleration = 250,
@@ -39,8 +34,44 @@ namespace OOP_Beispiel
                 Speed = 350
             };
 
-            motorcycle.LogInformation();
-            motorcycle.Move();
+            vehicles.Add(car);
+            vehicles.Add(plane);
+            vehicles.Add(motorcycle);
+
+            Console.WriteLine("Welches Fahrzeug möchtest du fahren?");
+            var userInput = Console.ReadLine();
+
+            foreach(Vehicle vehicle in vehicles)
+            {
+                if(vehicle.GetType().Name == userInput)
+                {
+                    Console.WriteLine("Fahrzeug gefunden: " + userInput);
+
+                    vehicle.LogInformation();
+
+                    if(userInput == "Car")
+                    {
+                        Car myCar = vehicle as Car;
+                        myCar.Move();
+                    }
+                    else if(userInput == "Plane")
+                    {
+                        Plane myPlane = vehicle as Plane;
+                        myPlane.Move();
+                        myPlane.Landing();
+                    }
+                    else if(userInput == "Motorcycle")
+                    {
+                        Motorcycle myMotorcycle = vehicle as Motorcycle;
+                        myMotorcycle.Move();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Dieses Fahrzeug steht nicht bereit");
+                    }
+                    break;
+                }
+            }
         }
     }
 }
