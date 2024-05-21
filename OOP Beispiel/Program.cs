@@ -34,36 +34,51 @@ namespace OOP_Beispiel
                 Speed = 350
             };
 
+            Helicopter helicopter = new Helicopter()
+            {
+                Acceleration = 250,
+                DoorCount = 0,
+                Breakspeed = 25,
+                Speed = 350
+            };
+
             vehicles.Add(car);
             vehicles.Add(plane);
             vehicles.Add(motorcycle);
+            vehicles.Add(helicopter);
 
             Console.WriteLine("Welches Fahrzeug möchtest du fahren?");
             var userInput = Console.ReadLine();
 
-            foreach(Vehicle vehicle in vehicles)
+            foreach (Vehicle vehicle in vehicles)
             {
-                if(vehicle.GetType().Name == userInput)
+                if (vehicle.GetType().Name == userInput)
                 {
                     Console.WriteLine("Fahrzeug gefunden: " + userInput);
 
                     vehicle.LogInformation();
 
-                    if(userInput == "Car")
+                    if (userInput == nameof(Car))
                     {
                         Car myCar = vehicle as Car;
                         myCar.Move();
                     }
-                    else if(userInput == "Plane")
+                    else if (userInput == nameof(Plane))
                     {
                         Plane myPlane = vehicle as Plane;
                         myPlane.Move();
                         myPlane.Landing();
                     }
-                    else if(userInput == "Motorcycle")
+                    else if (userInput == nameof(Motorcycle))
                     {
                         Motorcycle myMotorcycle = vehicle as Motorcycle;
                         myMotorcycle.Move();
+                    }
+                    else if (userInput == nameof(Helicopter))
+                    {
+                        Helicopter myHeli = vehicle as Helicopter;
+                        myHeli.Move();
+                        myHeli.Landing();
                     }
                     else
                     {
